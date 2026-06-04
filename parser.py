@@ -86,16 +86,14 @@ def parse_pda(filepath):
     current_section = None
     with open(filepath, 'r') as f:
         lines = [line.strip() for line in f if line.strip() and not line.strip().startswith('#')]
+    raw_transitions = []
     for line in lines:
         if line.startswith("sigma:"):
-            elemente = line.replace("sigma:", "").split(",")
-            sigma = {e.strip() for e in elemente if e.strip()}
+            sigma = {e.strip() for e in line.replace("sigma:", "").split(",") if e.strip()}
         elif line.startswith("stack_alphabet:"):
-            elemente = line.replace("stack_alphabet:", "").split(",")
-            stack_alphabet = {e.strip() for e in elemente if e.strip()}
+            stack_alphabet = {e.strip() for e in line.replace("stack_alphabet:", "").split(",") if e.strip()}
         elif line.startswith("states:"):
-            elemente = line.replace("states:", "").split(",")
-            for element in elemente:
+            for element in line.replace("states:", "").split(","):
                 componente = element.strip().split()
                 if not componente:
                     continue
@@ -112,14 +110,23 @@ def parse_pda(filepath):
         elif current_section == "transitions":
             stanga, dreapta = line.split("->")
             parti_stanga = [p.strip() for p in stanga.split(",")]
-            stare_sursa = parti_stanga[0]
+            stare_sursa  = parti_stanga[0]
             simbol_input = parti_stanga[1]
-            top_stiva = parti_stanga[2]
+            top_stiva    = parti_stanga[2]
             parti_dreapta = [p.strip() for p in dreapta.split(",")]
-            stare_dest = parti_dreapta[0]
-            push_string = parti_dreapta[1] if len(parti_dreapta) > 1 else "eps"
-            cheie = (stare_sursa, simbol_input, top_stiva)
+            stare_dest    = parti_dreapta[0]
+            push_string   = parti_dreapta[1] if len(parti_dreapta) > 1 else "eps"
+            raw_transitions.append((stare_sursa, simbol_input, top_stiva, stare_dest, push_string))
+    for (stare_sursa, simbol_input, top_stiva, stare_dest, push_string) in raw_transitions:
+        if top_stiva == "*":
+            simboluri_top = list(stack_alphabet)
+        else:
+            simboluri_top = [top_stiva]
+ 
+        for top in simboluri_top:
+            push = top if push_string == "*" else push_string
+            cheie = (stare_sursa, simbol_input, top)
             if cheie not in transitions:
                 transitions[cheie] = []
-            transitions[cheie].append((stare_dest, push_string))
+            transitions[cheie].append((stare_dest, push))
     return sigma, stack_alphabet, states, start_state, final_states, start_stack, transitions
