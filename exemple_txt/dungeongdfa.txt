@@ -1,0 +1,20 @@
+sigma: east, west, north, south, iau
+states: start s, entrance, lab, library, workshop, garden, final f, entrancek, labk, libraryk, workshopk, gardenk, labkp
+transitions:
+start, west -> entrance
+entrance, west -> lab
+entrance, north -> library
+library, south -> entrance
+library, west -> workshop
+library, iau -> libraryk
+workshop, north -> garden
+workshop, east -> library
+libraryk, south -> entrancek
+libraryk, west -> workshopk
+entrancek, west -> labk
+entrancek, north -> libraryk
+labk, iau -> labkp
+labkp, west -> entrancek
+workshopk, north -> gardenk
+workshopk, east -> libraryk
+gardenk, west -> final

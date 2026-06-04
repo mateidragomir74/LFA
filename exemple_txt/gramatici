@@ -1,0 +1,5 @@
+VN: S
+VT: a b
+S: S
+P:
+S -> a S b | a b
