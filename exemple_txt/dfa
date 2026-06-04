@@ -1,0 +1,7 @@
+sigma: a, b
+states: q0 s f, q1
+transitions:
+q0, a -> q1
+q0, b -> q0
+q1, a -> q0
+q1, b -> q1
