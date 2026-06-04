@@ -1,0 +1,26 @@
+sigma: east, west, north, south, iau
+stack_alphabet: K, Z
+states: start s, entrance, library, workshop, garden, final f
+start_stack: Z
+transitions:
+
+start, west, Z -> entrance, Z
+entrance, north, Z -> library, Z
+library, south, Z -> entrance, Z
+library, west, Z -> workshop, Z
+workshop, east, Z -> library, Z
+workshop, north, Z -> garden, Z
+garden, south, Z -> workshop, Z
+
+
+entrance, north, K -> library, K
+library, south, K -> entrance, K
+library, west, K -> workshop, K
+workshop, east, K -> library, K
+workshop, north, K -> garden, K
+garden, south, K -> workshop, K
+
+library, iau, Z -> library, KZ
+
+
+garden, west, K -> final, eps
