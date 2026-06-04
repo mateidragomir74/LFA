@@ -4,7 +4,7 @@
 
 ### parser.py
 Citeste fisierele de definitie pentru DFA, NFA si PDA.
-Nu se ruleaza direct — e importat de celelalte fisiere.
+Nu se ruleaza direct, e importat de celelalte fisiere.
 
 ---
 
@@ -110,7 +110,7 @@ S -> a S b | a b
 
 ### jocdungeoncugrafici.py
 Joc dungeon bazat pe NFA cu grafici, generat cu AI.
-Harta jocului e definita printr-un fisier NFA — starile sunt camere, tranzitiile sunt directii de mers.
+Harta jocului e definita printr-un fisier NFA starile sunt camere, tranzitiile sunt directii de mers.
 
 **Input:** numele fisierului cu harta (format NFA), apoi comenzi de miscare.
 **Output:** interfata grafica in terminal cu harta, inventar si descrierea camerei curente.
