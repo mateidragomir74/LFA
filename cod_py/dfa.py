@@ -4,7 +4,6 @@ from parser import parse_dfa
 
 def accepta_cuvant(cuvant, start_state, final_states, transitions):
     stare_curenta = start_state
-    cuvant_curatat = cuvant.replace(" ", "")
     for simbol in cuvant_curatat:
         tranzitii_stare = transitions.get(stare_curenta, {})
         if simbol not in tranzitii_stare:
