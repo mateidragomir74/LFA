@@ -1,4 +1,4 @@
-# Teoria Calculatoarelor — Laboratoare
+# Laboratoare Theory of Computation
 
 ## cod_py
 
